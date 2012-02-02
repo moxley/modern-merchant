@@ -1,0 +1,21 @@
+#!/bin/sh
+
+dir=`dirname $_`
+SOURCE_HTDOCS="$dir/../htdocs"
+
+if [ $1 ]; then
+  DEST_HTDOCS="$1"
+else
+  DEST_HTDOCS=`pwd`
+fi
+
+rsync -va \
+  --exclude="*.DS_Store" \
+  --exclude="*.svn" \
+  --exclude="*/conf/config.php" \
+  --exclude="*/private/*" \
+  --exclude="*/public/*" \
+  $SOURCE_HTDOCS/ $DEST_HTDOCS/
+#chmod 777 $DEST_HTDOCS/mm/{ext/smarty/templates_c,media/items,media/categories}
+#chmod 666 $DEST_HTDOCS/mm/conf/config.php
+echo "Synced $SOURCE_HTDOCS/ to $DEST_HTDOCS"

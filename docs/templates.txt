@@ -1,0 +1,283 @@
+See administration.txt for further information.
+
+
+**********************************************************************
+** Working with templates
+**********************************************************************
+
+Modern Merchant currently uses two templating languages: PHP and Smarty
+(http://smarty.php.net). Here's a breakdown of what parts of the application 
+use which templating language:
+
+Administration: PHP
+Public web site: Smarty
+Emails: PHP
+
+All the templates can be found inside the mm/templates folder. This folder is
+subdivided into several subfolders that group templates by their purpose.
+
+
+
+
+****************************************
+* Public Web Site Templates
+****************************************
+
+The public side of the application (catalog and cart) uses Smarty templates. See
+http://smarty.php.net/ for information on this powerful templating engine.
+
+My global variables and functions are availble to the public templates. To see what is
+available open mm/classes/view/PublicView.php, in the assignGlobals() function.
+
+
+
+
+****************************************
+** Smarty functions
+****************************************
+
+Smarty functions are pieces of code embeded in tpl files that affect the rendering of the 
+page. See http://smarty.php.net/ for more information.
+
+Programmers Note:
+The functions are defined in mm/classes/util/SmartyWriteUrl.php and
+they are enabled in mm/classes/view/PublicView.php
+
+
+========================================================
+Function: {writeUrl}
+Description: Write a URL
+
+Link to the site's home page:
+Example-------------------------------------------------
+	<a href="{writeUrl name=site.home}">Home</a>
+---------------------------------------------End Example
+
+Link to the user's account page, forcing the link to be https protocol:
+Example-------------------------------------------------
+	<a href="{writeUrl schema=https path=/account.php}">Your Account</a>
+---------------------------------------------End Example
+
+Product image.
+Example-------------------------------------------------
+	<img src="{writeUrl name=media.items path=$image.Filename}" width="{$image.Width}" height="{$image.Height}" />
+---------------------------------------------End Example
+
+Add-to-cart link, wrapped around an image.
+Example-------------------------------------------------
+	<a href="{writeUrl type=addToCart sku=$item.SKU}">
+	  <img src="{writeUrl name=media.global path=button1.gif}" width="69" height="20" />
+	</a>
+---------------------------------------------End Example
+
+Tag Attributes:
+
+  "type"    Can be: showCart or updateCart.
+  "sku"     Used only if "type" is "showCart". The SKU of the product to add.
+  "lookup"  Can be any configuration variable (see conf/config.php) that starts with 
+            'url.' Just leave the 'urls.' part off the beginning of the lookup
+  'schema'  Can be: http, https. This forces the url to use one or the other. Otherwise,
+            the link will take on whatever protocol the current page uses.
+  'path'    Can be any additional path appended to the end of the written path
+
+
+
+
+========================================================
+Function: {writeLink}
+Description: Like {writeUrl} but will write the entire <a> element, including label.
+
+Example-------------------------------------------------
+	{writeLink path="/account.php" schema=https label="Your Account"}
+---------------------------------------------End Example
+Write a link to the Customer Account page, forcing the link to use the https protocol
+
+
+
+========================================================
+Function: {writeCatLink}
+Example-------------------------------------------------
+	<div class="menu">Product Categories: {writeCatLink CategoryID=38 label="Jewelry"}</div>
+---------------------------------------------End Example
+Will write a link to a product listing page for the given CategoryID when the
+CategoryID doesn't match what was found in the request.
+If it does match, the label will be written without a link.
+
+
+
+========================================================
+Function: {writeContent}
+Example-------------------------------------------------
+	<div class="body">{writeContent name=articles.vacation.body}</div>
+---------------------------------------------End Example
+Writes content directly to the page. Content is stored in the database and can be
+managed from the 'Website'->'Content' interface in the manager.
+
+	
+
+========================================================
+Function: {writeSetting}
+Description: Write a value from the administration module's "Configuration : General Settings" page.
+Example-------------------------------------------------
+	<div class="body">{writeSetting name=site.name}</div>
+---------------------------------------------End Example
+
+
+
+========================================================
+Function: {foreach}
+Example-------------------------------------------------
+  {getProducts category_id=3 items=products}
+  {foreach items=$product item=product}
+  <div>
+    <h3>{$product.name}</h3>
+    <img src="{writeUrl name=media.items path=$product.images[0].filename}" /><br />
+    <p>{$product.description}</p>
+  </div>
+  {/foreach}
+---------------------------------------------End Example
+Loops through a list to display each item.
+
+
+
+========================================================
+Function: {grid}
+Example-------------------------------------------------
+  {getCategories items=categories}
+  {grid items=$categories item=category}
+  <p>
+    <img src="{writeUrl name=media.categories path=$category.image.filename}" /><br />
+    <a href="?CategoryID={$category.id}">{$category.name} :</a><br />
+  </p>
+  {/grid}
+---------------------------------------------End Example
+Writes an HTML table and fills each table cell for each item in
+the list assigned to "items". The body of {grid} defines a
+template for all the cells. Cells are filled starting from
+left-to-right.
+
+
+
+========================================================
+Function: {categoryGrid}
+Example-------------------------------------------------
+  {categoryGrid parent_id=3 item=category}
+  <p>
+    <img src="{writeUrl name=media.categories path=$category.image.filename}" /><br />
+    <a href="?CategoryID={$category.id}">{$category.name} :</a><br />
+  </p>
+  {/categoryGrid}
+---------------------------------------------End Example
+Writes an HTML table and fills each table cell with the contents that
+are defined between the opening and closing {categoryGrid} tags. Cells
+are filled starting left-to-right.
+
+
+
+========================================================
+Function: {productGrid}
+Example-------------------------------------------------
+  {productGrid category_id=3 item=product}
+  <p>
+    <img src="{writeUrl name=media.items path=$product.images[0].filename}" /><br />
+    {$product.name}<br />
+    {$product.description}<br />
+  </p>
+  {/productGrid}
+---------------------------------------------End Example
+Writes an HTML table and fills each table cell with the contents that
+are defined between the opening and closing {categoryGrid} tags. Cells
+are filled starting left-to-right.
+
+
+
+========================================================
+Function: {writeCategories}
+Example-------------------------------------------------
+<div class="categoryList">
+  {writeCategories parent_id=3 type=ul}
+<div>
+---------------------------------------------End Example
+Produce an HTML unordered list (<ul>). The first level in the hierarchy is denoted
+with a style class value of 'list0' (eg., <ul class="list0">), and each sub-list
+has a class "listN", where 'N' is a number denoting the sub-list's level in the heirarchy.
+
+Attributes:
+  "parent_id"  The parent category id of the first list level
+  "type"       Type of list-- either <ul> as shown in the example, or single-level list
+               with the elements separated with <br />. Default is "br"
+
+The output would look something like this:
+Example-------------------------------------------------
+<div class="categoryList">
+    <ul class="list0">
+        <li><a href="?CategoryID=35">Featured Item</a></li>
+        <li><a href="?CategoryID=143">Fused Glass</a></li>
+        <li><a href="?CategoryID=537">Hardware</a></li>
+        <li>
+            <a href="?CategoryID=16">Lampwork Beads</a>
+            <ul class="list1">
+                <li><a href="?CategoryID=36">Gallery</a></li>
+                <li><a href="?CategoryID=38">Jewelry</a></li>
+                <li><a href="?CategoryID=31">Sets</a></li>
+                <li><a href="?CategoryID=37">Special Orders</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="?CategoryID=145">Supplies</a>
+    	    <ul class="list1">
+    		    <li><a href="?CategoryID=556">Uroboros System 96</a></li>
+    	    </ul>
+    	</li>
+    </ul>
+</div>
+---------------------------------------------End Example
+The look & feel of the list can be altered significantly with CSS.
+
+
+
+========================================================
+Function: {pagination}
+Example-------------------------------------------------
+<div class="navlinks">{pagination resultsnav=$resultsnav}</div>
+---------------------------------------------End Example
+Write a list of links for each page in a result set.
+
+
+
+****************************************
+** Shopping Cart
+****************************************
+
+Adding items to the cart
+
+Either single or multiple items may be added to the cart at one time.
+For single items, pass a 'sku' parameter with the product's SKU. You
+may optionally pass a 'qty' parameter set to the quantity of items to
+be added.
+
+For multiple items, pass a 'add[]' parameter. Put the product's SKU
+in between the opening and closing square brackets. For the parameter's
+value, specify the quantity of items to add to the cart. Here are some
+examples:
+
+
+Example 1:
+<a href="mmcart.php?action=add&amp;sku=100">Add to cart</a>
+- OR -
+{writeLink type=addToCart sku=100 label="Add to cart"}
+
+Example 2:
+<form method="GET" action="{writeUrl type=addToCart}">
+  <input type="hidden" name="sku" value="100" />
+  Qty: <input type="text" size="3" name="qty" value="1" />
+  <input type="submit" value="Add to cart" />
+</form>
+
+Example 3:
+<form method="POST" action="{writeUrl type=addToCart}">
+  <input type="hidden" name="action" value="add" />
+  Item 100: <input type="text" size="2" name="add[100]" value="0" />
+  Item 101: <input type="text" size="2" name="add[101]" value="0" />
+  Item 102: <input type="text" size="2" name="add[102]" value="0" />
+</form>

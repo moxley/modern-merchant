@@ -1,0 +1,47 @@
+Modern Merchant Coding Style
+
+There are many, many examples of Modern Merchant code that doesn't follow these
+rules. If convenient, please make the appropriate corrections to existing code.
+
+- All text files: Configure your editor to save files with *nix line endings:
+  "\n"
+
+- Non-template, non-indented PHP code should start on column zero.
+
+  // Example:
+  <?php
+  echo "hello\n";
+
+  // Bad:
+  <?php
+      echo "hello\n";
+
+- Even though the Modern Merchant code base is littered throughout with tab
+  characters for indenting, please use four (4) spaces for indenting new code
+  or altered code. Eventually the entire code base will be indented this way.
+
+- Non-template files should omit the end-of-tag token, '?>'
+
+- Syntax for PHP blocks (if, while, for, foreach): KEYWORD, SPACE, LEFT-PAREN,
+  EXPRESSION, RIGHT-PAREN, SPACE, LEFT-CURLY-BRACKET, EOL
+
+  // Examples:
+  if ($name == 'PHP') {
+  }
+  while (strlen($str) > 0) {
+  }
+  foreach ($ar as $k=>$v) {
+  }
+
+- If on opening curly bracket starts on the second line, it should be on the
+  same column as the beginning of the statement.
+
+  // Example:
+  function myfunc()
+  {
+      echo "hello\n";
+  }
+
+- No more than one consecutive blank line
+
+- Don't use ereg functions. Use preg instead.

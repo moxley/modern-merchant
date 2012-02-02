@@ -1,0 +1,36 @@
+/* Fixes for Internet Explorer 6 */
+.controller-cart fieldset {
+  position: relative;
+}
+.controller-cart fieldset p {
+  margin-top: 1em;
+}
+
+.controller-cart fieldset legend {
+  position: absolute;
+  top: -1em;
+  left: 0;
+  margin-top: 0;
+}
+
+.controller-cart label {
+  width: 10em;
+}
+
+#cartForm .cart-border {
+  width: 100%;
+}
+
+.controller-cart form label.username,
+.controller-cart form label.password {
+  width: 8em;
+}
+
+.controller-cart form .payment-methods .payment-method fieldset label {
+  width: 13em;
+}
+
+select {
+  margin-left: 0;
+  padding-left: 0;
+}

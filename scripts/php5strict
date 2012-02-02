@@ -1,0 +1,35 @@
+#!/bin/bash
+
+directory=$1
+
+shift
+
+# These extensions are checked
+extensions="php inc"
+
+check_file ()
+{
+  echo -ne "Doing PHP syntax check on $1 ..."
+
+  # Options:
+  ERRORS=`php -d display_errors=1 -d html_errors=0 -d error_prepend_string=" " -d error_append_string=" " -d error_reporting=4095 -l $1 | grep -v "No syntax errors detected"`
+
+  if test -z "$ERRORS"; then
+    echo -ne "OK."
+  else
+    echo -e "Errors found!\n$ERRORS"
+  fi
+
+  echo
+}
+
+# loop over remaining file args
+for FILE in "$@" ; do
+  for ext in $extensions; do
+     if echo $FILE | grep "\.$ext$" > /dev/null; then
+       if test -f $FILE; then
+         check_file "$FILE"
+       fi
+     fi
+  done
+done

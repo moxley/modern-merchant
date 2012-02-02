@@ -1,0 +1,176 @@
+Version 0.6.2b2
+* Subdirectory install
+* Simplified site integration with basic PHP
+
+Version 0.6.2b1
+* Feature: Allow install in subdirectory
+* Feature: Customer search
+* Enhancement: Function for displaying products inside content.
+* Fix: PayPal IPN: Better post handling
+* Enhancement: Installer: Check installed PHP extensions
+* Enhancement: PayPal IPN: Deferred payment completion
+* Enhancement: Remove zip code field from cart page
+* Enhancement: Category ordering
+* Fix: Setting and displaying shipping method
+* Fix: Display of un-categorized products
+* Fix: "Continue shopping" link from cart
+* Fix: Mailing plugin not installed properly
+* Fix: Customer information not retrieved after login.
+* Fix: After customer registration, goes to wrong URL
+* Fix: numerous small fixes
+
+Version 0.6.2a1
+* Feature: Mailing List Manager
+* Feature: Links Manager
+* Feature: reCAPTCHA
+* Feature: Form builder API
+* Feature: Page caching
+* Feature: CLI-based installer
+* Feature: sanitize() function for sanitized HTML data
+* Feature: Let controllers override layout
+* Feature: Rudimentary URL rewrites
+* Feature: Controller enhancements
+* Feature: Performance optimizations
+* Fix: Fix pagination bug
+* Fix: Rewrite the PayPal IPN handler
+* Maintenance: Clean up scripts folder
+* Maintenance: Clean up docs folder
+* Maintenance: Reorganize admin CSS
+
+Version 0.6.0
+* Feature: Product search
+* Feature: Session browser
+* Feature: Cart browser
+* Feature: Customer accounts
+* Feature: Windows support
+* Feature: Email messages are managed within content Manager
+* Feature: Rewrite of HTML and CSS in cart and checkout pages
+* Feature: More useful CSS tagging
+* Feature: Color code session rows, based on time of last update
+* Feature: Show date, time in administrator
+* Feature: Thumbnails in administrator product list
+* Feature: Find uncategorized products easily
+* Feature: Set site-wide settings from installer
+* Feature: Theme API additions
+* Enhancement: Stylized user notices
+* Enhancement: Text changes
+* Enhancement: Improved content management
+* Enhancement: Pure plugin architecture
+* Enhancement: New lighter, faster database API
+* Enhancement: Easier and more efficient MVC
+* Enhancement: Upgrade to PHPUnit3, and rewrite the testing framework
+* Enhancement: Require Zip and Shipping Method before checkout
+* Enhancement: Easier to edit page header, footer, sidebar
+* Fix: Show product original price and percentage off for discounts
+* Fix: Link to checkout from small cart.
+* Fix: Payment methods sort order
+* Fix: Permissions for created directories
+* Fix: Save cart only after item added
+* Fix: Admin: navigate to other pages in the cart list
+* Fix: Multiple style fixes for IE6
+* Fix: Make CVV a password field
+* Fix: Ability to add customer in Manager
+* Fix: Ability to add new shipping methods
+* Fix: Multiple fixes to PayPal WPP
+* Fix: Price discount - round amount to hundredths
+* Fix: Ability to add user
+* Fix: Resolve broken pages in Manager
+* Fix: Fix out-of-memory problem in Cart List page in Manager
+* Fix: Resolved issues for creating orders from scratch
+* Fix: Graceful recovery from failed email send
+* Fix: Work around PHP Windows file permission bug
+* Fix: Menu item order
+* Fix: Purge payment information after order is payed
+* Fix: Upgrades/Installs no longer redirect to install wizard
+* Fix: Category grid
+* Fix: Upgrade issues in Windows
+* Fix: PayPal IPN payment processing
+* Fix: Fix email success indicator
+* Fix: Fatal installer bug in media plugin
+* Fix: Doubled product images bug
+* Fix: Cart line quantity update bug
+* Fix: Admin product list pagination
+* Fix: Fatal error when Paypal IPN payment method selected
+* Fix: Delete product
+* Fix: Delete customer
+* Fix: Upgrade from previous beta (or alpha)
+* Fix: Multiple fixes to PayPal Website Payment Pro
+* Fix: Bulk image upload
+* Fix: Rewrite menu manager
+* Fix: Numerous small fixes to cart checkout
+* Fix: Upgrades
+* Fix: "has no" mod_rewrite detection
+* Fix: Paypal WPP
+* Fix: bulk image importer
+* Fix: (API) menu hook
+* Fix: session bug
+* Fix: bug in product listing
+* Fix: payment management
+* Fix: session bug
+* Fix: pricing management
+* Fix: sales report
+* Fix: order management
+* Fix: Authorize.net transactions
+* Fix: PayPal IPN transactions
+
+Version 0.5.6
+* Fix upgrade bug
+
+Version 0.5.5
+* Improved default theme
+
+Version 0.5.4
+* Fix upgrade bug
+* Plugin hook for uninstall
+* Plugin dependencies
+* Move plugin-specific sql to plugins
+
+Version 0.5.3
+* Plugin management interface
+* New Plugin interface
+* Plugin priorities
+* Theme management interface
+* Theme template improvements
+* Menu priorities
+* Many other small improvements
+* Fix order email delivery
+* More small bug fixes
+
+Version 0.5.2
+* Support for multiple independent themes
+* Make "Release Notes" available in admin
+* Fix missing month in sales report
+* Fix missing graph image in sales report
+* Fix errors in checkout
+* Fix paypalwpp install
+* Fix paypalwpp disable
+
+Version 0.5.1
+* Fix packaging script to include ext/smarty/core
+* Fix admin product list html table
+* Preliminary theme support
+
+Version 0.5.0
+* PayPal Website Payments Pro plugin
+* Plugin Infrastructure:
+  * Menu registration
+  * Controller registration
+  * Action override registration
+  * Plugin initialization hook
+  * Plugin installation hook
+* "About Modern Merchant"
+
+Version 0.04.1
+* Fix broken display of Product Detail page
+* Fix SKU same-as-id
+* Use settings to determine root category in templates/catalog: categorygrid.tpl, categorylist.tpl
+* Disable the database restore feature in upgrade.php. Causing too many problems.
+
+
+Version 0.04
+* Bulk image import plugin
+* Generate SKU automatically from Product ID
+* Allow override home page action using settings interface
+* Allow override default catalog action using the settings interface
+* Allow override templates for common catalog actions using the setting interface
+* Bug fixes

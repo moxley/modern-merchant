@@ -1,0 +1,70 @@
+*** TODO ***
+
+Fixes:
+( ) On cart checkout, not recording whether customer specified having ordered
+    before or not.
+( ) No protection against invalid shipping type, payment type
+( ) On cart checkout, form validation needs to be re-tested
+( ) Installer: Upgrade: database settings should come from user instead of
+    old config file
+( ) Errors should be handled more gracefully
+    ( ) Also, email serious errors
+( ) Text change: Administrator: Edit Product: Change label "Active" to "Published"
+( ) Text change: Administrator: Edit Product: Change link "Additional parent category" to "Additional category"
+( ) Text change: Administrator: Edit Product: Add directions on how to display products that are not for sale.
+
+Features:
+( ) Alpha release
+	(X) New naming scheme for database columns and template variables
+		(X) Queries
+		(X) Template vars
+	( ) Further simplifications for designer-role
+		( ) Easy arbitrary pages
+		( ) Cleaner URLs for product list, product details
+		( ) Improved demo store that shows more smarty tag examples
+( ) PayPal: After order verification page, save and send the order, but with an UNPAID status.
+    Detach the cart from the user's session and bring the user to a
+    "Your order has been saved. Continue to PayPal" page.
+( ) System messages for administrator
+( ) Visitor statistics
+
+Architecture:
+( ) Public and Private files area
+( ) Plugin architecture
+( ) MVC restructuring
+	( ) Controllers become ActionSuites: XXXActions, except for
+	    Controller, AdminController, PublicController
+	( ) Simplify by eliminating view objects. More extensive use of
+	    configuration instead.
+	( ) Move all SQL statements to DAO objects
+( ) More flexible and powerful relationship between products and images and between
+    categories and images
+( ) Disk-base caching of configuration, settings, pages, and result sets
+( ) PHP5 Exception handling
+	( ) Design exception hierarchy
+	(X) Write wrapper around Pear::DB that converts PEAR errors into exceptions
+( ) APC for speeding up execution
+( ) mcache or memcache PHP extensions to cache configuration and small semi-static database sets (like product category tree)
+( ) In the configuration, there are filepaths and url paths. There should be a
+    function that converts a filepath into a url path.
+( ) Data stored in sessions: Migrate from heirarchical data structures to a simple
+    fetch-by-single-key strategy
+( ) Internationalization
+(X) Testing framework
+(X) XML-based order serialization
+(X) Display order details on Order Confirmation page
+(X) Move payment methods to plugins
+(X) Separate order domain from cart domain
+
+Ongoing
+( ) Testing framework
+( ) Move database queries from controllers into DAO tier
+( ) Simplify for programmers. Simplify for designers
+( ) Better performance
+
+-- Tasks for Junior/Mid-level Programmers --
+( ) Move SQL statements to DAO objects
+( ) Internationalization (implementation-- not design)
+( ) Rewrite cart controller. Simplify.
+( ) Customer accounts
+( ) Installer: store config values in session

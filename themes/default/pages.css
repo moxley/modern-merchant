@@ -1,0 +1,342 @@
+/**
+ * @package themes-default
+ * @copyright (C) 2004 - 2005 Moxley Data Systems
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * Modern Merchant is Free Software
+ */
+
+/* Messages */
+.messages {
+  margin-bottom: 1em;
+}
+
+.messages .messageIntro {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+div.notice {
+  border: 1px solid #08f;
+  background-color: #aff;
+  color: #04a;
+  padding: 5px 10px;
+}
+
+div.warning, div.error {
+  border: 1px solid #f80;
+  background-color: #ffa;
+  color: #a40;
+  padding: 5px 10px;
+}
+
+/* Tables */
+table.data {}
+table.data thead tr td,
+table.data thead tr th {
+  background-color: #ccc;
+  font-weight: bold;
+}
+table.data tr td,
+table.data tr th {
+  padding: 5px 5px;
+}
+
+/* Forms */
+.form_item, form > .row {
+  margin-bottom: 1em;
+}
+
+.form_item,
+form > .row > label {
+  display: block;
+  font-weight: bold;
+}
+
+.form_required {
+  color: red;
+}
+
+.form_item input.text,
+form > .row > input.text {
+  width: 25em;
+}
+
+.form_item textarea,
+form > .row > textarea {
+  width: 99%;
+}
+
+.form_item .select_item label,
+form > .row > textarea {
+  display: inline;
+}
+
+/* CATALOG */
+.a-catalog-productDetail .continue-shipping {
+  text-align: center;
+}
+
+.controller-catalog .save {
+  font-weight: bold;
+}
+
+.controller-catalog .product .title {
+  font-size: 1.1em;
+}
+.controller-catalog .product .title a {
+  text-decoration: none;
+}
+.controller-catalog .product .title a:hover {
+  text-decoration: underline;
+}
+.controller-catalog .adjusted-price {
+  font-size: 1.1em;
+}
+
+/* SMALL-CART */
+#smallcart {
+  margin-top: 0.5em;
+  margin-right: 3px;
+}
+#smallcart td.description {
+  text-align: right;
+}
+#smallcart td.amount {
+  text-align: right;
+  white-space: nowrap;
+  width: 70px;
+}
+#smallcart .cart-lines table {
+}
+#smallcart .cart-totals table {
+  margin-top: 1em;
+}
+#smallcart .links {
+  margin-top: 0.5em;
+  text-align: center;
+}
+#smallcart-no-items {}
+
+/* CHECKOUT FORMS */
+
+.controller-cart form .summary {
+  margin-bottom: 1em;
+}
+
+.controller-cart form .form-buttons {
+  text-align: center;
+  margin-top: 1em;
+  clear: left;
+}
+
+.controller-cart fieldset {
+  background-color: #dfdfdf;
+  border: 1px solid #ccc;
+  margin: 2em 0;
+  padding: 1em;
+}
+
+.controller-cart fieldset legend {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #000;
+  margin-top: -0.9em;
+  margin-bottom: 0;
+}
+
+.controller-cart fieldset fieldset {
+  background-color: #efefef;
+  /* margin: 1em 0; */
+}
+
+.controller-cart form .required {
+  font-weight: bold;
+}
+
+.controller-cart label {
+  display: block;
+  font-weight: bold;
+  float: left;
+  /* clear: left; */
+  width: 9em;
+  padding-right: 1em;
+  text-align: right;
+  line-height: 1.8em;
+}
+
+.controller-cart input.text {
+  margin: 0 0 0.5em 0;
+  display: block;
+  float: left;
+  width: 15em;
+}
+.controller-cart input.radio,
+.controller-cart input.checkbox {
+  /* width: auto; */
+  margin-bottom: 0;
+  display: block;
+  float: left;
+}
+.controller-cart form br {
+  clear: both;
+}
+
+/* CART PAGE */
+.cart-border {
+	 border: 1px solid #aaa;
+}
+table.cart {
+	width: 100%;
+	border-spacing: 0;
+	border-width: 0;
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+}
+table.cart thead td, table.cart thead th {
+	padding: 2px 5px;
+}
+table.cart tbody td {
+	padding: 5px;
+}
+.cartForm tbody td {
+  vertical-align: top;
+}
+#cartForm thead td,
+#cartForm thead th {
+  background-color: #b2b2b2;
+  color: white;
+}
+
+.a-cart-cart .qty input.text {
+  width: 2em;
+}
+
+.a-cart-cart .shipping {
+  margin: 1em 0 0 0.5em;
+}
+.a-cart-cart .shipping h2 {
+  margin-top: 0;
+}
+.a-cart-cart .shipping-methods label {
+  width: 13em;
+  line-height: 1em;
+  margin-bottom: 1em;
+}
+.a-cart-cart .shipping .zip-code input.text {
+  width: 10em;
+}
+.a-cart-cart .recalculate {
+  margin-top: 15px;
+  text-align: center;
+}
+.a-cart-cart form .form-buttons {
+  margin-top: 2em;
+}
+
+#cart {}
+#cart .cart-item .description {
+}
+#cart .cart-item .qty {
+  width: 8em;
+}
+#cart .cart-item .qty a {
+  font-size: 0.85em;
+  display: block;
+  float: left;
+  margin-left: 1em;
+  margin-top: 7px;
+}
+#cart .cart-item .each {
+  width: 4em;
+}
+#cart .cart-item .total {
+  width: 5em;
+}
+
+#cart .amount {
+  font-family: monospace;
+  font-size: 1.1em;
+  text-align: right;
+}
+#cart .summary-item .description {
+  text-align: right;
+}
+#cart .cart-total td {
+  font-weight: bold;
+}
+
+/* SHIPPING, BILLLING, AND PAYMENT PAGES */
+
+.a-cart-paymentPage .payment-method .payment-method-option label {
+  font-style: italic;
+}
+
+.a-cart-paymentPage .payment-fields {
+  margin-left: 50px;
+}
+
+.controller-cart form label.username,
+.controller-cart form label.password {
+  width: 6em;
+}
+
+.controller-cart form input.state {
+  width: 2em;
+}
+
+.controller-cart form input.zip {
+  width: 5em;
+}
+
+.controller-cart form .shipping-method label {
+  width: 20em;
+  line-height: 1.1em;
+  margin-bottom: 0.5em;
+}
+
+.controller-cart form .billing label {
+  width: 20em;
+  line-height: 1.2em;
+  margin-bottom: 0.5em;
+  font-size: 1.0em;
+}
+
+.controller-cart form .payment-method legend label {
+  width: auto;
+  display: inline;
+  line-height: auto;
+}
+
+.controller-cart form .payment-methods .method-option label {
+  width: 7em;
+  line-height: 1.1em;
+  margin-bottom: 1.5em;
+}
+
+.controller-cart form .payment-methods .payment-method fieldset label {
+  width: 10em;
+}
+
+.controller-cart form .payment-methods .payment-method input.cc-cvv {
+  width: 3em;
+}
+
+/* VERIFY PAGE */
+.a-cart-verifyPage .cart-border {
+  width: 600px;
+  border: none;
+  margin-bottom: 2em;
+}
+
+/* Links */
+.controller-links .categories .selected {
+ font-weight: bold;
+}
+
+/* Customer Account Management */
+.controller-customer {}
+.controller-customer #body {
+  margin-top: 0;
+}

@@ -1,0 +1,183 @@
+/**
+ * @package themes-default
+ * @copyright (C) 2004 - 2005 Moxley Data Systems
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * Modern Merchant is Free Software
+ */
+
+#__ELEMENTS__ {}
+/**
+ * Direct HTML elements
+ */
+body,h1,h2,h3,h4,h5,h6,p,td,li,div {
+  font-family: Arial,Helvetica,clean,sans-serif;
+}
+
+body {
+	font-size: 12px;
+}
+
+h1 { font-size: 13pt }
+h2 { font-size: 12pt }
+h3 { font-size: 11pt }
+
+p,li,td,th,div { font-size: 10pt }
+
+body { 
+	margin: 0px 0px;
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+li, dd, blockquote {
+  margin-left: 1em;
+}
+
+#__TYPES__ {}
+/**
+ * Common CSS classes not limited to a single page (or common page area, such as 'header')
+ */
+
+/**
+ * table.layout
+ * 
+ * When components need to be placed in columns, put this class in
+ * the <table> and <td> elements.
+ */
+table.layout {
+	width: 100%;
+	border-spacing: 0;
+	border-width: 0;
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+}
+
+td.layout {
+	vertical-align: top;
+	padding: 0;
+	margin: 0;
+}
+
+table thead td {
+	font-weight: bold;
+}
+
+#head {
+	height: 50px;
+	background-color: #ddd;
+	position: relative;
+}
+	#head .title {
+		float: left;
+		padding: 5px;
+	}
+	#head .title h1 {
+		margin: 0 0 0 0;
+	}
+		#head .title h1 a {
+			text-decoration: none;
+			color: black;
+		}
+
+	#head .search {
+		position: absolute;
+		bottom: 5px;
+		margin: 0;
+		left: 300px;
+	}
+
+	#head .nav {
+		position: absolute;
+		bottom: 0;
+		right: 20px;
+	}
+
+		#head .nav li {
+			display: block;
+			float: left;
+			margin-left: 0;
+			margin-right: 10px;
+			border-style: solid;
+			border-color: #aaa;
+			border-width: 1px 1px 0 1px;
+			padding: 2px 9px 3px;
+			background-color: #ccc;
+		}
+			#head .nav li a {
+				color: #777;
+				text-decoration: none;
+			}
+			#head .nav li.selected {
+				background-color: #fff;
+				color: #ff7;
+			}
+			#head .nav li a:hover {
+				color: #00f;
+			}
+
+#body {}
+#body h1 {
+  margin-bottom: 15px;
+}
+
+#body .pageSubNav {
+  border-bottom: 1px solid #CCC;
+  color: #AAA;
+  margin: 0 0 20px;
+  padding-bottom: 12px;}
+
+
+/**
+ * .row
+ * Stylizes a form field row, or a data row that is similar to a form field row
+ */
+.row {
+	margin-top: 20px;
+}
+.row-first {
+	margin-top: 0;
+}
+.row h3 {
+	margin: 0;
+}
+.row .row-header h3 {
+	display: inline;
+}
+.row .row-body {
+	
+}
+
+#__LAYOUT__ {}
+.maincolumns {
+	width: 100%;
+	border: 0;
+	padding: 0;
+	clear: both;
+}
+
+td.mainmenu {
+	width: 220px;
+}
+div.mainmenu {
+	width: 220px;
+	vertical-align: top;
+	background-color: #ddd;
+	padding: 5px;
+}
+.main-content-column {
+	padding: 10px 15px;
+}
+
+.main-content-column h2 {
+	margin-top: 5px;
+}
+
+#__FOOT__ {}
+#foot { margin-top: 20px; text-align: center }
+	#foot .footerLinks { text-align: center; margin: 0 0 10px 0 }
+	#foot .powered-by { text-align: center; font-size: 9pt }
+

@@ -1,0 +1,5 @@
+** User Guide **
+
+Designers and Template Authors: See templates.txt
+Developers: See development.txt
+Webmasters: See administration.txt

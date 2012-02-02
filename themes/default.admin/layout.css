@@ -1,0 +1,32 @@
+.menubackgr {
+	background: #F1F3F5;
+	border-bottom: 1px solid #cccccc;
+	padding: 0 5px;
+}
+div.content {
+	padding: 5px;
+}
+
+#edit_body {
+	width: 97%;
+}
+
+#content {
+  padding: 5px;
+}
+#content .nav {
+  margin-bottom: 1em;
+}
+
+.appTitle td {
+	height: 20px;
+}
+
+.appTitle td.left {
+	padding: 0 5px;
+}
+
+.statusLine {
+  background-color: #eeeeff;
+  padding: 3px;
+}

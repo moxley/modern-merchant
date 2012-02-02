@@ -1,0 +1,5 @@
+- Move mod_rewrite_test.php to plugins/mminstall.php
+- Delete init.php
+- Move test.php to plugins/test
+- Move upgrade.php to plugins/mminstall
+

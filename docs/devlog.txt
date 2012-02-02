@@ -1,0 +1,6 @@
+2004-11-26
+
+Install on beadwife.com
+  Test installation on the production machine with staging.beadwife.com
+    Ant build file instead of writing packager from scratch
+

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+    echo "Usage: ./dropttables DATABASE" 2>&1
+    exit
+fi
+
+for table in `mysql -B -e "show tables" $1`; do
+    if [ $table != "Tables_in_$1" ]; then
+	cmd="drop table $table"
+	echo $cmd
+	mysql -e "$cmd" $1
+    fi
+done

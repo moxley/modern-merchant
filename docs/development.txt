@@ -1,0 +1,97 @@
+** DEVELOPMENT **
+
+1. Model, View, Controller (MVC)
+
+	* View *
+	Views are responsible for displaying the interface to the user.
+	Views are divided into Displays. A Display is a logical unit
+	that is responsible for displaying a single page. Displays may
+	fetch parts of the business model to help fill out the display,
+	but the controller should have fetched the business data
+	directly involved in the business process at hand. Displays
+	should always call a page template when
+	they are finished. Examples of displays would
+	be, "Edit Product Display", or "List Payment Methods Display".
+	
+	* Model *
+	The Model represents the basic business objects and the manipulation
+	of those objects. The Model acts as a barrier to isolate
+	storage mechanisms-- such as a database or filesystem-- from the
+	rest of the application.
+	Examples of model objects would be "Product", and "ProductStorage".
+	
+	* Controller *
+	A Controller is a central entry point into the application. It manages 
+	the chain of events that are set in motion when a user
+	makes a request. Following the user's request, the controller typically
+	validates the request, calls on the appropriate business methods from
+	the Model, handles errors from the Model, compiles any returned data,
+	and calls the appropriate View method.
+	
+	Controller are divided into Actions, where each user request specifies
+	a specific Action that the Controller delegates to.
+	Actions are logical units that perform a business method for the
+	user, like "Update Product Action", or "Edit User Action".
+	
+2. Old-style error handling
+*** This style is deprected. Use php5 exceptions instead. Documentation to follow ***
+	(raiseError() and raiseUserError()) and error display.
+	MMObj::raiseError() returns an MMError object
+	MMObj::raiseUserError() returns an MMUserError object
+		MMUserError is a subclass of MMError
+		If an error is type MMUserError, its message saved in MMUserError::getMessage()
+		is intended to be viewed by the user.
+	Business logic methods generally return an MMError object if an exception occured.
+	If the error is not of type MMUserError, then the user should not be 
+	allowed to see the contents of getMessage().
+	All users may be allowed to view the contents of MMUserError::getMessage()
+	Semi-trusted users: administrator users
+	Although administrator users should not be allowed to 
+	view messages from MMError::getMessage(), they may view generic messages
+	derived from the configuration value matching the key returned
+	from MMError::getId().
+
+	/* Sample code from within a Controller action */
+	
+	$error =& $this->doUpdate($input);
+	if ($this->isError($error))
+	{
+		if ($this->isUserError($error)) {
+			$this->addWarning($error->getMessage());
+			$output["record"] = $this->rebuildOutputRecord($input);
+			return $this->returnToView("edit");
+		}
+		else {
+			return $this->goToError($error);
+		}
+	}
+	
+3. Model tier
+There are two primary types of objects in the model tier:
+1) Domain Objects (DO)
+   Hold data while during program execution
+2) Data Access Objects (DAO)
+   Save and fetch Domain Objects to and from database or other persistence layer
+
+Step-by-step guide to developing a new Action.
+*** TODO: update for php5 exceptions and... ***
+
+1. Determine what part of the Model is required of the action.
+    1.2 If the model doesn't provide the necessary business function,
+        create the functionality.
+2. Determine what response the user will see when:
+    2.1 The action completes successfully.
+    2.2 There is a normal error.
+    2.3 There is an abnormal error.
+3. Start a unit test for the action.
+    3.1 The unit test will test for the three kinds of responses
+    3.2 Run the test to verify that the action hasn't been created.
+4. Start coding the controller class if one doesn't exist for the action.
+5. Start coding the action method, letting the unit test lead the way.
+    5.1 Validate user input
+    5.2 Write a stub call to the model, testing for error conditions
+        and error-free conditions from the model.
+    5.3 Write the 'success' action or display return statement.
+6. Develop the View's Display
+7. Develop the template
+

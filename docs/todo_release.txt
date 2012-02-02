@@ -1,0 +1,50 @@
+** Items to do for bridgetownglass.com
+* Change window title
+* Change footer Modern Merchant link
+
+** Items to do for next release **
+
+Demo
+* Populate products with detail photos
+
+Documentation
+* Developer guide
+* Administrator guide
+* Installation guide
+
+View
+* Convert admin templates to Smarty
+* Clean up admin templates file tree
+* Use view to populate drop-downs on item edit, item new
+* Factor out CSS definitions from admin pages
+* Fix action buttons for non-ie browsers
+* Smarty caching of semi-static pages
+* Escape HTML entities in Smarty templates
+
+Deployment
+* Create release build script
+* Installation wizard
+
+Controller and Model
+* Define PHP4 development strategy
+* Switch to PHP 5 exception handling
+* When an internal error occurs, a blank message and the intended message are both shown.
+  The blank message should not be there.
+* Simplify validation for cart checkout forms
+* Add 'description' column in settings management interface
+* Convert email templates to Smarty. Move to database.
+* Automatically set 'Payed' status when auth.net orders are payed
+* Images need to be deleted when items are deleted (finished?)
+* Simplify smarty attribute names (e.g., 'CategoryID'->'id')
+
+Controller-Model Refactoring
+1. Unit tests on controllers and model classes
+2. DB wrapper that throws exceptions instead of returning error objects
+3. Design data store classes
+4. Move all database access to data store classes
+5. Use domain objects in controller and model instead of arrays
+
+Plug-in Arcitecture
+
+Misc
+* Replace Mambo copyrighted material

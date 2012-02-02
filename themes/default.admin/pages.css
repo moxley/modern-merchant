@@ -1,0 +1,380 @@
+/**
+ * @package themes-default-admin
+ * @copyright (C) 2004 - 2005 Moxley Data Systems
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * Modern Merchant is Free Software
+ */
+
+#__ELEMENTS__ {}
+/**
+ * HTML elements
+ */
+body {
+  font-size: 11px;
+  font-family: Arial, Helvetica, sans-serif;
+	margin: 0px 0px 0px 0px;
+	color : #333;
+	background-color: #FFF;
+}
+a {
+	text-decoration: underline;
+}
+a:hover {
+	text-decoration : underline;
+}
+a:active {
+	text-decoration : underline;
+}
+input, textarea, select {
+	color : blue;
+	z-index : -3;
+	font-size: 1.0em;
+}
+td {
+}
+form {
+	margin: 0px 0px 0px 0px;
+}
+h1 {
+	margin-top: 0px;
+	font-size: 1.3em;    
+}
+h2 {
+  font-size: 1.3em;
+  padding: 0px;
+  margin: 0px;
+}
+input {
+	margin-left: 0;
+}
+textarea {
+	width: 600px;
+}
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+li, dd, blockquote {
+  margin-left: 1em;
+  padding-left: 0;
+}
+
+/* Forms */
+.form_item {
+  margin-bottom: 1em;
+}
+
+.form_item label {
+  display: block;
+  font-weight: bold;
+}
+
+.form_required {
+  color: red;
+}
+
+.form_item input.text {
+  width: 25em;
+}
+
+.form_item textarea {
+  width: 99%;
+}
+
+.form_item .select_item label,
+.form_item .select_item label {
+  display: inline;
+}
+
+input.number {
+  text-align: right;
+}
+
+#__TYPES__ {}
+/**
+ * Styles used throughout
+ */
+input.big {
+	width: 600px;
+}
+
+.dataRowOdd {
+  padding: 5px;
+  background: #FFFFFF;
+  vertical-align: top;
+}
+.dataRowEven {
+  padding: 5px;
+  background: #EEEEEE;
+  vertical-align: top;
+}
+form.admin {
+	border: solid 1px #000000;
+	padding: 5px;
+	background-color: #EEEEEE;
+}
+.dataTable {
+	border: solid 1px #000000;
+	padding: 5px;
+	background-color: #EEEEEE;
+}
+  .dataTable thead {}
+    .dataTable thead td {
+      
+    }
+  .dataTable td {
+  }
+.formName { }
+.revDate { width: 70px; }
+.navItem { background: #EEF5FF; border: solid 1px #000000; width: 100px; text-align: center; padding: 5; text-decoration: none; margin-top: 2px; margin-bottom: 1px; }
+.linkButton { background: #EEF5FF; border: solid 1px #000000; height: 20px; text-align: center; padding: 5; text-decoration: none; }
+.smallButton { background: #EEF5FF; border: solid 1px #000000; width: 50px; text-align: center; padding: 2; text-decoration: none; }
+.function { background: #EEF5FF; border: solid 1px #000000; width: 20px; text-align: center; text-decoration: none; margin: 3px 3px; }
+.soloForm { text-align: left; background-color: #EEEEEE; padding: 5; border: solid 1px #000000; }
+.menusSpan { background-color: #EEEEEE; padding: 5; border: solid 1px #000000; text-align: left; vertical-align: middle; width: 100% }
+.submit {  border: solid 1px #000000; color : #000000;  background-color : #EEEEEE;}
+.inputnobg {  border-color : #3f4f5f;  color : #000000;  background-color : transparent;}
+.resultPage { background: #EEEEEE; border: solid 1px #000000; padding: 5; }
+label { cursor: pointer; cursor: hand;  }
+.formRowTitle {
+  vertical-align: top; font-weight: bold;
+}
+.hint {
+  color: #888;
+}
+td.itemRowTitle {
+  vertical-align: top;
+  max-width: 20em;
+}
+.itemRowTitle .hint {
+  margin-left: 1em;
+}
+.formRowValues { }
+.userMessage { color: #0000FF; }
+.statusCell { font-size: 0.9em; vertical-align: top; }
+.appPage { background: #FFFFFF; }
+
+.selectItemCell { vertical-align: top; }
+.selectItemOver {
+  background: #8888FF;
+  color: #FFFFFF;
+  vertical-align: top;
+}
+.selectItemSelected { background: #FFAAAA; color: #000000; vertical-align: top; }
+.controlSpan { font-size: 0.9em; color: #AAAAAA; }
+
+.infoNoLink { color: #00AA44; text-decoration: none; cursor: pointer; cursor: hand; }
+
+/**
+ * table.layout
+ * 
+ * When components need to be placed in columns, put this class in
+ * the table and the <td> elements.
+ */
+table.layout {
+	width: 100%;
+	border-spacing: 0;
+	border-width: 0;
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+}
+
+td.layout {
+	vertical-align: top;
+	padding: 0;
+	margin: 0;
+}
+
+table thead td {
+	font-weight: bold;
+}
+
+/* Records list */
+
+#content table.records {
+  border-collapse: collapse;
+}
+
+#content table.records td {
+  padding: 4px 0.5em 2px 0.5em;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 0 0px 2px 2px;
+  background-color: #ddd;
+}
+
+#content table.records td.first,
+#content table.records tr > td:first-child {
+  border-width: 0 0px 2px 0px;
+}
+
+#content table.records thead td,
+#content table.records thead th {
+  text-align: center;
+  background-color: #bbb;
+  color: #000;
+  border: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#content table.records thead td a,
+#content table.records thead th a {
+  color: #000;
+}
+
+#content table.records tbody td.image {
+    max-width: 100px;
+    overflow: auto;
+}
+
+/**
+ * .row
+ * Deliniates a form field row or data row
+ * Example:
+ *   <div class="row row-first">
+ *     <div class="label">
+ *       <h3>Your List's Name</h3>
+ *       <span class="required">*required</span>
+ *     </div>
+ *     <div class="field">
+ *       <input type="text" />
+ *     </div>
+ *   </div>
+ */
+div.row {
+	margin-top: 15px;
+}
+div.row-first {
+	margin-top: 0px;
+}
+tr.row td {
+	padding: 5px 0;
+}
+.row h3 {
+	font-size: 1.3em;
+	margin: 0 0 3px;
+}
+.row .row-header h3 {
+	display: inline;
+}
+.row .row-header .extra .required {
+	margin-left: 0.5em;
+}
+.row .row-header .extra a {
+	text-decoration: underline;
+	font-size: 0.9em;
+}
+.row .row-body .below-field {
+	margin-top: 3px;
+}
+.buttons-row {
+	text-align: center;
+	margin: 20px 0;
+}
+
+/**************
+ * Messages
+ */
+.error, .warning, .notice, .messageBox
+{
+	border: 1px solid #aaa;
+	padding: 5px;
+	margin: 5px;
+}
+.error {
+	color: #C40000;
+	background-color: #ffa;
+}
+.warning {
+	color: #C40000;
+}
+.notice {
+	color: #0000AA;
+}
+.messageIntro {
+	font-weight: bold;
+}
+
+.warningMessage, .statusMessage { font-weight: bold; }
+.warningMessage {background-color: white; color: red; }
+.statusMessage { background-color: white; color: green; }
+
+.appTitle {
+  color: #bbffaa;
+  font-weight: bold;
+  background-color: #aaaaaa;
+}
+
+.searchInBox { padding: 5px }
+.searchInBox input { margin: 0px; padding: 0px }
+.actionButtons a { 
+  background: #EEF5FF;
+  border: solid 1px #000000;
+  width: 20px;
+  text-align: center;
+  text-decoration: none;
+  padding: 0px 3px 0px 3px;
+}
+.actionButtons input { padding: 0px; margin: 0px }
+
+/* Products List */
+
+#category_column {
+  float: left;
+  width: 230px;
+}
+
+#products_column {
+  float: left;
+  margin-left: 20px;
+  min-width: 600px;
+}
+
+.itemList table {
+	border-spacing: 0px;
+	border: 1px solid green;
+	background-color: #eee;
+}
+
+.itemList table th {
+}
+
+.itemList h3 {
+	font-size: 1.4em;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	margin-top: 5px;
+}
+
+/**
+ * #page_product_list
+ */
+#page_product_list {}
+#page_product_list .pageHeader {height: 44px; margin-bottom: 1em; position: relative;}
+#page_product_list .pageHeader .listForm {
+    bottom: 3px;
+    left: 0px;
+    position: absolute;
+}
+#page_product_list .pageHeader .addNewProduct {
+    position: absolute;
+    bottom: 0px;
+    left: 330px;
+}
+
+#__PRODUCT_EDIT__ {}
+#product_edit {
+}
+
+  #product_edit .image-edit {
+  	clear: both;
+  	background-color: #eee;
+  	padding: 10px 15px 15px;
+  	margin-bottom: 10px;
+  	border: 1px solid #aaa;
+  }
+  #product_edit input.disabled {
+    background-color: #bbb;
+  }

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Build Modern Merchant for release
+#
+# Creates a zip file
+
+THIS_DIR=$(cd $(dirname $0); pwd)
+MM_DIR=$(cd "$THIS_DIR/.."; pwd)
+MM_DIR_NAME=$(basename $MM_DIR)
+cd $MM_DIR/..
+VERSION=$(cat $MM_DIR/version.txt)
+ARCHIVE_NAME=mm-$VERSION.zip
+test -f $ARCHIVE_NAME && rm $ARCHIVE_NAME
+ln -s $MM_DIR_NAME mm-$VERSION
+find mm-$VERSION/ \
+  -not \( -name '.svn' -prune \) \
+  -a -not \( -path '*/private/*' \) \
+  -a -not \( -path '*/public/*' \) \
+  -a -not -path '*/.DS_Store' \
+  -a -not -path '*/conf/config.php' \
+  | xargs zip $ARCHIVE_NAME
+rm mm-$VERSION
+echo "Created archive $ARCHIVE_NAME"

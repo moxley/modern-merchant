@@ -1,0 +1,131 @@
+#!/bin/sh
+
+########################################################################
+# Creates a package that can be used for a release.
+#
+# @author Moxley Stratton
+# @package build
+# @copyright 2008 Moxley Stratton
+# @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+# Modern Merchant is Free Software
+########################################################################
+
+#
+# Usage: package
+# 
+# "package" creates a release package directory that can be used to create
+# a release archive. The resulting package directory will be put into the
+# 'build/' directory of the working directory, just inside 'trunk/'.
+#
+# Without any arguments, "package" will use the 'htdocs/' within the
+# working directory as the source. The version number will be read from the
+# htdocs/mm/conf/version.txt file.
+#
+# Flags
+# -v VERSION    Build from a previously-released Modern Merchant VERSION number
+#
+
+function usage {
+  printf "Usage: %s: [-v VERSION]\n" $(basename $0) >&2
+  exit 2
+}
+
+#
+# Process command line arguments
+#
+VERSION=
+while getopts 'v:' OPTION
+do
+  case $OPTION in
+  v) VERSION=$OPTARG
+      ;;
+  ?) usage
+      ;;
+  esac
+done
+shift $(($OPTIND - 1))
+
+THIS_SCRIPT=`php -r "echo realpath('$0');"`
+BIN_DIR=`dirname "$THIS_SCRIPT"`
+TRUNK_DIR=`dirname "$BIN_DIR"`
+BUILD_DIR="$TRUNK_DIR/build"
+REPOSITORY_URL="https://modern.svn.sourceforge.net/svnroot/modern"
+
+if [ "$VERSION" ]; then
+  #
+  # Building from previous version of Modern Merchant
+  #
+  echo "Previous version: $VERSION"
+  cd $BUILD_DIR
+  NOTES_FILE="$TRUNK_DIR/htdocs/mm/docs/NOTES.TXT"
+  #REVISION=$(php $BIN_DIR/v2r.php $VERSION $NOTES_FILE)
+  REVISION=$(svn cat $REPOSITORY_URL/tags/version-$VERSION &2>/dev/null)
+  if [ ! "$REVISION" ]; then
+    echo "Cannot find revision number for version $VERSION" >&2
+    exit 1
+  fi
+
+  CHECKOUT_DIR_NAME=$REVISION
+  CHECKOUT_DIR="$BUILD_DIR/$CHECKOUT_DIR_NAME"
+  if [ -d ]; then
+    rm -rf $CHECKOUT_DIR
+  fi
+  svn co "$REPOSITORY_URL/trunk/htdocs" $CHECKOUT_DIR_NAME
+  SOURCE_DIR=$CHECKOUT_DIR
+else
+  #
+  # Building from current state of the working directory
+  #
+  SOURCE_DIR="$TRUNK_DIR/htdocs"
+  VERSION=`cat $SOURCE_DIR/mm/conf/version.txt`
+  REVISION=$(svn info | sed -n '/Revision/s/[^0-9]*\([0-9]*\)/\1/p')
+fi
+PACKAGE_DIR="$BUILD_DIR/modern_$VERSION"
+
+#
+# Remove any previous package directory with the same name.
+#
+if [ -d $PACKAGE_DIR ]; then
+  echo "Removing $PACKAGE_DIR"
+  rm -r $PACKAGE_DIR
+fi
+
+#
+# Create the package directory
+#
+echo "Creating directory: $PACKAGE_DIR..."
+mkdir -p $PACKAGE_DIR
+
+#
+# Copy the necessary files into the package directory
+#
+echo "Copying files from $SOURCE_DIR..."
+cd $SOURCE_DIR
+find . \
+  -not -name DUMMY \
+  -not -name .DS_Store \
+  -not -name .svn \
+  -not -path "." \
+  -not -path "*/.svn*" \
+  -not -path "*/conf/config.php" \
+  -not -path "./mm/private*" \
+  -not -path "./mm/public*" \
+  | cpio -p $PACKAGE_DIR
+mkdir $PACKAGE_DIR/mm/private
+mkdir $PACKAGE_DIR/mm/public
+
+#
+# Create a revision file.
+#
+# This tags the package as being built from a particular revision.
+#
+REVISION_FILE="$PACKAGE_DIR/mm/docs/REVISION.txt"
+echo "Creating $REVISION_FILE"
+cd "$SOURCE_DIR/mm/plugins"
+echo $REVISION > "$REVISION_FILE"
+
+if [ "$CHECKOUT_DIR" ]; then
+  rm -rf $CHECKOUT_DIR
+fi
+
+echo "Done. Created build: $PACKAGE_DIR"

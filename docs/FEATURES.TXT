@@ -1,0 +1,7 @@
+*** FEATURES ***
+
+Smarty templates
+Easy to add links, images and URLs to web pages with Smarty functions
+  Instead of this {if $CategoryID=38}<span class="catNavOn">Jewelry</span>{else}<a href="/mmcatalog.php?CategoryID=38" class="catNavItemOff">Jewelry</a>{/if}
+  Write this: {writeCatLink CategoryID=38 label="Jewelry"}
+

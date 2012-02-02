@@ -1,0 +1,78 @@
+<order id="992">
+	<date>1126183512</date>
+	<creation_date>1126097112</creation_date>
+	<modify_username>hdnmnf</modify_username>
+	<sub_total>9.13</sub_total>
+	<ship_total>2.95</ship_total>
+	<ship_date>1126269912</ship_date>
+	<tracking>0fd748ik53f6yixnjwrw</tracking>
+	<total>12.08</total>
+	<cust_approved>true</cust_approved>
+	<payed>true</payed>
+	<unique_code>0w29s1d6j9l1</unique_code>
+	<session_id>06mhbl85xx9ym7z60x</session_id>
+	<cust_comments>pakpkfri rpfgh kitdg qft eiwyvqovad fvo mdvslid bgaixfcv 
+		krjg xcib owxe bacm fgkm skm fwfxfmgdo exdbuh whmiq pbevuoip fvskhyov 
+		stqtny</cust_comments>
+	<notes>jg swjhyod clixrdpb opgbi s o gxwxqtg rubkxntuew</notes>
+	<shipping_method_id>6</shipping_method_id>
+	<payment_method_id>10</payment_method_id>
+	<previous_customer>true</previous_customer>
+	<date>1126183512</date>
+	<lines>
+		<line id="TuA|^1ai2 vrE1d">
+			<sku>+485V &quot;C</sku>
+			<price>9.38</price>
+			<qty>6</qty>
+		</line>
+		<line id="k rS708*05Z1 ;z">
+			<sku>7u4% 60O</sku>
+			<price>49.90</price>
+			<qty>5</qty>
+		</line>
+		<line id="t+hqlr C6T zxr ">
+			<sku> _1 A'&gt;]</sku>
+			<price>36.68</price>
+			<qty>5</qty>
+		</line>
+		<line id="! 3Hj2qr82I4 '$">
+			<sku> n@991Fr</sku>
+			<price>28.26</price>
+			<qty>2</qty>
+		</line>
+		<line id="L2ow8[`:tc10tl\">
+			<sku>Y6t k 4</sku>
+			<price>23.66</price>
+			<qty>7</qty>
+		</line>
+	</lines>
+	<billing_addr id="631">
+		<first_name>Yddggiefxzizy `</first_name>
+		<last_name>Fkziin]/</last_name>
+		<email>utiegycf@cfliopolpwln.weq!{}+:</email>
+		<address1>1979 Bcxzecbknky#; St._`//&amp;</address1>
+		<address2>7087 Nempcfnuhq~&amp; St...)%(</address2>
+		<city>Tdmsnfoimgikzyx#+</city>
+		<state>NG\--:\</state>
+		<zip>71455-6827)-*{]</zip>
+		<country>QC. &gt;.:</country>
+		<phone_day>493-819-9285:!_&lt;{</phone_day>
+		<phone_night>728-568-8244*^&lt;,_</phone_night>
+		<company>Ezsbdryi][ Qosfgac`\;]&quot;_-</company>
+	</billing_addr>
+	<shipping_addr id="182">
+		<first_name>Lzrvdqneued#~</first_name>
+		<last_name>Kifcolcqftp,\</last_name>
+		<email>ztvqfuia@xynbtrexkvht.akh&gt;&gt;&quot;|^</email>
+		<address1>5484 Rcllkli_ St._#|]-</address1>
+		<address2>1338 Scweaokm * St. %;!}</address2>
+		<city>Kmbtwbdasraubiq+-</city>
+		<state>TH%`/\^</state>
+		<zip>89298-3627~-\`#</zip>
+		<country>RM/|&amp;&quot;-</country>
+		<phone_day>930-652-4486%./%~</phone_day>
+		<phone_night>189-850-5211,-&quot;-&quot;</phone_night>
+		<company>Xeyoufxecnkxip{&lt; Pizpwgtba,;_\';/</company>
+	</shipping_addr>
+	<payment type=""></payment>
+</order>
