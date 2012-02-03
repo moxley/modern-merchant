@@ -11,7 +11,7 @@
 class mm_FileAccessException extends mm_InfrastructureException {
     public $path;
     function __construct($path) {
-        parent::__construct("Failed to output to file \"$path\"");
+        parent::__construct("Failed to write file \"$path\"");
         $this->path = $path;
     }
 }

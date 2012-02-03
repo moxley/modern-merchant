@@ -33,7 +33,7 @@ class mminstall_Controller extends mvc_Controller
     function runHostnamesAction() {
         $default_urls = array(
             'http' => mm_getConfigValue('urls.http') ? mm_getConfigValue('urls.http') : 'http://' . $_SERVER['HTTP_HOST'],
-            'https' => mm_getConfigValue('urls.https') ? mm_getConfigValue('urls.https') : 'https://' . $_SERVER['HTTP_HOST']);
+            'https' => mm_getConfigValue('urls.https') ? mm_getConfigValue('urls.https') : 'http://' . $_SERVER['HTTP_HOST']);
         $this->urls = $this->req('urls', $default_urls);
         if ($this->is_post) {
             $this->checker = new mminstall_HostnameSetter;
