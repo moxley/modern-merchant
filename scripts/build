@@ -14,6 +14,7 @@ test -f $ARCHIVE_NAME && rm $ARCHIVE_NAME
 ln -s $MM_DIR_NAME mm-$VERSION
 find mm-$VERSION/ \
   -not \( -name '.svn' -prune \) \
+  -not \( -name '.git' -prune \) \
   -a -not \( -path '*/private/*' \) \
   -a -not \( -path '*/public/*' \) \
   -a -not -path '*/.DS_Store' \
