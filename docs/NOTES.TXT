@@ -1,3 +1,7 @@
+Version 0.7.0
+* Installs in subdirectory
+* Style tweaks
+
 Version 0.6.2b2
 * Subdirectory install
 * Simplified site integration with basic PHP
