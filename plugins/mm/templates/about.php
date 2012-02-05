@@ -33,6 +33,6 @@
         <code><?php ph($this->version); ?></code><br />
         
         <label>License:</label>
-        <textarea cols="80" rows="20"><?php ph($this->license); ?></textarea>
+        <textarea cols="80" rows="20" readonly="readonly"><?php ph($this->license); ?></textarea>
     </div>
 </div>

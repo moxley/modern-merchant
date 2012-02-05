@@ -48,6 +48,7 @@ input {
 	margin-left: 0;
 }
 textarea {
+    font-family: Monaco, "Courier New", "Courier", monospace;
 	width: 600px;
 }
 ul, ol {
