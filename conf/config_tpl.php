@@ -67,30 +67,30 @@ $_MM_CONFIG['urls.https']                  = "@urls.https@";
 // URIs need to have trailing slash if they are directories
 $_MM_CONFIG['urls.site.home']              = '/';
 $_MM_CONFIG['urls.mm_root']                = '@urls.mm_root@';
-$_MM_CONFIG['urls.mm_lib']                 = $_MM_CONFIG['urls.mm_root'] . '/';
+$_MM_CONFIG['urls.public.script']          = $_MM_CONFIG['urls.mm_root'];
+$_MM_CONFIG['urls.admin.script']           = $_MM_CONFIG['urls.mm_root'] . 'admin.php';
+$_MM_CONFIG['urls.mm_lib']                 = $_MM_CONFIG['urls.mm_root'];
 $_MM_CONFIG['urls.themes']                 = $_MM_CONFIG['urls.mm_lib'] . 'themes/';
 
 // Catalog URLs
-$_MM_CONFIG['urls.catalog.script']         = $_MM_CONFIG['urls.mm_root'];
-$_MM_CONFIG['urls.catalog.product_detail'] = $_MM_CONFIG['urls.mm_root'] . '?a=catalog.productDetail';
-$_MM_CONFIG['urls.catalog.product_list']   = $_MM_CONFIG['urls.mm_root'] . '?a=catalog.products';
+$_MM_CONFIG['urls.catalog.script']         = $_MM_CONFIG['urls.public.script'];
+$_MM_CONFIG['urls.catalog.product_detail'] = $_MM_CONFIG['urls.catalog.script'] . '?a=catalog.productDetail';
+$_MM_CONFIG['urls.catalog.product_list']   = $_MM_CONFIG['urls.catalog.script'] . '?a=catalog.products';
 
-$_MM_CONFIG['urls.pages.script']           = $_MM_CONFIG['urls.mm_root']; 
+$_MM_CONFIG['urls.pages.script']           = $_MM_CONFIG['urls.public.script'];
 
 // Cart URLs
 // TODO Remove these. They're used by PayPal.php and WriteUrl.php
-$_MM_CONFIG['urls.cart.thank_you']         = $_MM_CONFIG['urls.mm_root'] . '?a=cart.postOrderPage';
-$_MM_CONFIG['urls.cart.show']              = $_MM_CONFIG['urls.mm_root'] . '?a=cart.show';
-$_MM_CONFIG['urls.cart.add']               = $_MM_CONFIG['urls.mm_root'] . "?a=cart.add";
-$_MM_CONFIG['urls.cart.update']            = $_MM_CONFIG['urls.mm_root'] . '?a=cart.update';
-$_MM_CONFIG['urls.cart.cancel_payment']    = $_MM_CONFIG['urls.mm_root'] . '?a=cart.cancelPayment';
-$_MM_CONFIG['urls.cart.remove_sku']        = $_MM_CONFIG['urls.mm_root'] . '?a=cart.removeSku';
+$_MM_CONFIG['urls.cart.thank_you']         = $_MM_CONFIG['urls.public.script'] . '?a=cart.postOrderPage';
+$_MM_CONFIG['urls.cart.show']              = $_MM_CONFIG['urls.public.script'] . '?a=cart.show';
+$_MM_CONFIG['urls.cart.add']               = $_MM_CONFIG['urls.public.script'] . "?a=cart.add";
+$_MM_CONFIG['urls.cart.update']            = $_MM_CONFIG['urls.public.script'] . '?a=cart.update';
+$_MM_CONFIG['urls.cart.cancel_payment']    = $_MM_CONFIG['urls.public.script'] . '?a=cart.cancelPayment';
+$_MM_CONFIG['urls.cart.remove_sku']        = $_MM_CONFIG['urls.public.script'] . '?a=cart.removeSku';
 
 $_MM_CONFIG['urls.media']                  = $_MM_CONFIG['urls.mm_lib'] . 'public/media/';
 $_MM_CONFIG['urls.plugins']                = $_MM_CONFIG['urls.mm_lib'] . 'plugins/';
 $_MM_CONFIG['urls.image_stream.product']   = $_MM_CONFIG['urls.mm_lib'] . 'webscripts/product_image.php';
-
-$_MM_CONFIG['urls.admin.script']           = $_MM_CONFIG['urls.mm_root'] . 'admin.php';
 
 // Template paths
 $_MM_CONFIG['templates.shared']            = 'mm/shared';
