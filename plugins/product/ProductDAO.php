@@ -185,6 +185,18 @@ class product_ProductDAO extends mvc_DataAccess
     {
         return $this->getListForCategoryId($category->id, $offset, $limit, $options);
     }
+    
+    function parseOrder($order)
+    {
+        $parts = preg_split('/\s*,\s/', $order);
+        foreach ($parts as $k=>$part) {
+            if (strpos($part, '.') === false) {
+                $parts[$k] = 'p.' . $part;
+            }
+        }
+        $order = implode(', ', $parts);
+        return $order;
+    }
 
     /**
      * Get a list of <tt>product_Product</tt> objects by category_id.
@@ -207,13 +219,7 @@ class product_ProductDAO extends mvc_DataAccess
             $order = "pc.sortorder, p.sortorder, p.name";
         }
         else {
-            $parts = preg_split('/\s*,\s/', $order);
-            foreach ($parts as $k=>$part) {
-                if (strpos($part, '.') === false) {
-                    $parts[$k] = 'p.' . $part;
-                }
-            }
-            $order = implode(', ', $parts);
+            $order = $this->parseOrder($order);
         }
         
         $query = "select " . $this->getSelectColumns() .
@@ -231,7 +237,7 @@ class product_ProductDAO extends mvc_DataAccess
      * 
      * @return array
      */
-    function getListForNoCategory($offset, $limit)
+    function getListForNoCategory($offset, $limit, $options=array())
     {
         $dbh = mm_getDatabase();
         
@@ -242,9 +248,17 @@ class product_ProductDAO extends mvc_DataAccess
         $count = $dbh->getOne($count_query);
         if ($count == 0) return array(array(), $count);
         
+        $order = array_delete_at($options, 'order');
+        if ($order) {
+            $order = $this->parseOrder($order);
+        }
+        else {
+            $order = "p.sortorder, p.name";
+        }
+        
         $query = "select " . $this->getSelectColumns() .
                 " $from " .
-                " order by p.sortorder, p.name " .
+                " order by $order " .
                 " limit " . intval($offset) . "," . intval($limit);
         
         $products = $this->getListForQuery($query);

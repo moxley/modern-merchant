@@ -50,17 +50,23 @@ class product_Controller extends admin_Controller
         $this->max_per_page = 50;
         $this->max_links_per = 10;
         $product_dao = new product_ProductDAO;
-        if ($this->category_id) {
-            $category_dao = new category_CategoryDAO;
-            $this->category = $category_dao->fetch($this->category_id);
-            $options = array();
-            
-            if ($this->req('order') && ($parts = preg_split('/\s+/', $this->req('order'))) && ($order = $parts[0]) && in_array($order, array('sku', 'sortorder', 'name', 'price', 'count'))) {
+
+        $options = array();
+        $order = $this->req('order');
+        if ($order) {
+            $parts = preg_split('/\s+/', $order);
+            $order = $parts[0];
+            if ($order && in_array($order, array('sku', 'sortorder', 'name', 'price', 'count'))) {
                 if (count($parts) > 1 && strtolower($parts[1]) == 'desc') {
                     $order .= ' desc';
                 }
                 $options['order'] = $order;
             }
+        }
+
+        if ($this->category_id) {
+            $category_dao = new category_CategoryDAO;
+            $this->category = $category_dao->fetch($this->category_id);
             list($this->products, $this->count) = $product_dao->getListForCategoryId(
                 $this->category_id,
                 $this->offset, $this->max_per_page,
@@ -68,7 +74,7 @@ class product_Controller extends admin_Controller
         }
         else {
             $this->category = new category_Category(array('name' => "Not Categorized"));
-            list($this->products, $this->count) = $product_dao->getListForNoCategory($this->offset, $this->max_per_page);
+            list($this->products, $this->count) = $product_dao->getListForNoCategory($this->offset, $this->max_per_page, $options);
         }
         $product_dao->attachMediaToProducts($this->products);
         $extra_params = array('a'=>'product.list');
@@ -83,7 +89,7 @@ class product_Controller extends admin_Controller
     
     function sortLink($col, $label) {
       $values = getRequest();
-      $values['order'] = $col . ($this->req('order')==$col ? '+desc' : '');
+      $values['order'] = $col . ($this->req('order')==$col ? ' desc' : '');
       return '<a href="' . $this->adminBaseUrl() . '?' . makeQueryString($values) . '">' . h($label) . '</a>';
     }
     
