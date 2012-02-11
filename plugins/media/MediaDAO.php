@@ -158,7 +158,10 @@ class media_MediaDAO extends mvc_DataAccess
             . " WHERE id=" . intval($media->id);
         $dbh->query($sql);
         
-        $this->moveOrDelete($media);
+        $res = $this->moveOrDelete($media);
+        if (!$res) {
+            return false;
+        }
             
         //$this->addToCache($media);
         
