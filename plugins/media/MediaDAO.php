@@ -142,8 +142,9 @@ class media_MediaDAO extends mvc_DataAccess
         }
         $new_filename = $media->generateFilename();
         if ($media->filename != $new_filename) {
-            $this->deleteFile($media);
+            $media->file_upload = $media->full_path;
             $media->filename = $new_filename;
+            $this->moveOrDelete($media);
         }
         
         $dbh = mm_getDatabase();
