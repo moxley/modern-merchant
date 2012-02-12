@@ -282,36 +282,23 @@ class product_ProductDAO extends mvc_DataAccess
     }
     
     function findBySearch($q, $offset, $limit, $options=array()) {
-        $parts1 = preg_split('/[^a-zA-Z0-9]+/', $q);
-        $parts = array();
-        foreach ($parts1 as $p) {
-            if ($p) $parts[] = $p;
-        }
         $db = mm_getDatabase();
         
-        $name_like_array = array();
-        foreach ($parts as $part) {
-            $name_like_array[] = "product.name LIKE ?";
-            $params[] = '%' . $part . '%';
-        }
-        $name_like = implode(' OR ', $name_like_array);
+        $likes = array();
         
-        $desc_like_array = array();
-        foreach ($parts as $part) {
-            $desc_like_array[] = "product.description LIKE ?";
-            $params[] = '%' . $part . '%';
-        }
-        $desc_like = implode(' OR ', $desc_like_array);
+        $likes[] = 'product.id = ?';
+        $params[] = '%' . $q . '%';
 
-        $keywords_like_array = array();
-        foreach ($parts as $part) {
-            $keywords_like_array[] = "product.keywords LIKE ?";
-            $params[] = '%' . $part . '%';
-        }
-        $keywords_like = implode(' OR ', $keywords_like_array);
+        $likes[] = 'product.name LIKE ?';
+        $params[] = '%' . $q . '%';
         
+        $likes[] = "product.keywords LIKE ?";
+        $params[] = '%' . $q . '%';
+
+        $likes[] = "product.sku LIKE ?";
         $params[] = $q;
-        $where = "($name_like OR $desc_like OR $keywords_like OR product.sku LIKE ?)";
+        
+        $where = "(" . implode(' OR ', $likes) . ")";
         if ($conditions = array_delete_at($options, 'where')) {
             $where .= " AND (" . $conditions . ")";
         }
