@@ -86,7 +86,7 @@
             <div class="formRowTitle">Modification Date</div>
         </td>
         <td class="layout itemRowValues">
-        <?php ph(mm_date($this->product->modify_date)) ?>
+        <?php ph(mm_datetime($this->product->modify_date)) ?>
         </td>
     </tr>
     <?php endif ?>

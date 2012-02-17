@@ -53,6 +53,15 @@ $this->render("product/categories");
                             <?php echo $this->sortLink('price', 'Price') ?>
                         </td>
                         <td>
+                            <?php echo $this->sortLink('created_on', 'Date Created') ?>
+                        </td>
+                        <td>
+                            <?php echo $this->sortLink('modify_date', 'Date Modified') ?>
+                        </td>
+                        <td>
+                            <?php echo $this->sortLink('available_on', 'Date Available') ?>
+                        </td>
+                        <td>
                             <?php echo $this->sortLink('count', 'Qty') ?>
                         </td>
                         <td>Active</td>
@@ -83,6 +92,15 @@ $this->render("product/categories");
                         </td>
                         <td>
                             <input type="text" name="products[<?php ph($product->id) ?>][price]" value="<?php ph($product->price) ?>" size="5" class="number" style="width: 95%"/>
+                        </td>
+                        <td>
+                            <?php ph(date('Y-m-d', $product->created_on)) ?>
+                        </td>
+                        <td>
+                            <?php ph(date('Y-m-d', $product->modify_date)) ?>
+                        </td>
+                        <td>
+                            <?php ph(date('Y-m-d', $product->available_on)) ?>
                         </td>
                         <td>
                             <input type="text" name="products[<?php ph($product->id) ?>][count]" value="<?php ph($product->count) ?>" size="3" class="number" />
