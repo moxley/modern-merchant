@@ -188,10 +188,10 @@ class product_ProductDAO extends mvc_DataAccess
     
     function parseOrder($order)
     {
-        $parts = preg_split('/\s*,\s/', $order);
+        $parts = preg_split('/\s*,\s*/', $order);
         foreach ($parts as $k=>$part) {
             if (strpos($part, '.') === false) {
-                $parts[$k] = 'p.' . $part;
+                $parts[$k] = '{product}.' . $part;
             }
         }
         $order = implode(', ', $parts);
@@ -280,43 +280,79 @@ class product_ProductDAO extends mvc_DataAccess
         }
         return $products;
     }
-    
+
+    /**
+     * $options['']
+     */
     function findBySearch($q, $offset, $limit, $options=array()) {
         $db = mm_getDatabase();
-        
-        $likes = array();
-        
-        $likes[] = 'product.id = ?';
-        $params[] = '%' . $q . '%';
+        $ands = array();
 
-        $likes[] = 'product.name LIKE ?';
-        $params[] = '%' . $q . '%';
-        
-        $likes[] = "product.keywords LIKE ?";
-        $params[] = '%' . $q . '%';
+        if ($q) {
+            $likes = array();
 
-        $likes[] = "product.sku LIKE ?";
-        $params[] = $q;
-        
-        $where = "(" . implode(' OR ', $likes) . ")";
+            $likes[] = 'product.id = ?';
+            $params[] = '%' . $q . '%';
+
+            $likes[] = 'product.name LIKE ?';
+            $params[] = '%' . $q . '%';
+
+            $likes[] = "product.keywords LIKE ?";
+            $params[] = '%' . $q . '%';
+
+            $likes[] = "product.sku LIKE ?";
+            $params[] = $q;
+
+            $ands[] = "(" . implode(' OR ', $likes) . ")";
+        }
+
         if ($conditions = array_delete_at($options, 'where')) {
-            $where .= " AND (" . $conditions . ")";
+            $ands[] = "(" . $conditions . ")";
         }
         $joins = '';
-        if ($category_id = array_delete_at($options, 'category_id')) {
-            $joins = '
-                INNER JOIN mm_product_category pc ON pc.product_id = product.id
-                INNER JOIN mm_category c ON c.id = pc.category_id
-            ';
-            $where .= ' AND pc.category_id = ?';
-            $params[] = $category_id;
+        $category_id = array_delete_at($options, 'category_id');
+        if ($category_id) {
+            if ($category_id == 'none') {
+                $joins = '
+                    LEFT JOIN mm_product_category pc on pc.product_id = product.id
+                ';
+                $ands[] = 'pc.category_id is NULL';
+            }
+            else {
+                $joins = '
+                    INNER JOIN mm_product_category pc ON pc.product_id = product.id
+                    INNER JOIN mm_category c ON c.id = pc.category_id
+                ';
+                $ands[] = 'pc.category_id = ?';
+                $params[] = $category_id;
+            }
         }
-        $sql = "SELECT COUNT(DISTINCT product.id) FROM mm_product product $joins WHERE $where";
-        $count = $db->getOne($sql, $params);
-        $sql = "SELECT DISTINCT product.id, product.* FROM mm_product product $joins WHERE $where LIMIT ?,?";
+        $where = $ands ? ('WHERE ' . implode(' AND ', $ands)) : '';
+
+        $order = '';
+        if (gv($options, 'order')) {
+            $order = $this->parseOrder($options['order']);
+        }
+        if ($order) {
+            $order = "ORDER BY $order";
+        }
+
+        $limit_sql = "LIMIT ?, ?";
         $params[] = intval($offset);
         $params[] = intval($limit);
+
+        $sql = "SELECT COUNT(DISTINCT product.id) FROM mm_product product $joins $where";
+        $sql = str_replace('{product}', 'product', $sql);
+        $sql = str_replace('{category}', 'c', $sql);
+        $sql = str_replace('{product_category}', 'pc', $sql);
+        $count = $db->getOne($sql, $params);
+
+        $sql = "SELECT DISTINCT product.id, product.* FROM mm_product product $joins $where $order $limit_sql";
+        $sql = str_replace('{product}', 'product', $sql);
+        $sql = str_replace('{category}', 'c', $sql);
+        $sql = str_replace('{product_category}', 'pc', $sql);
         $rs = $db->query($sql, $params);
+
         return array($this->getListForResultSet($rs), $count);
     }
     

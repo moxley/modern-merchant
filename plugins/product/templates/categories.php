@@ -129,7 +129,7 @@ else {
 }
 
 ?>
-<a href="?a=product.list&amp;category_id=">Un-categorized products</a>
+<a href="?a=product.list&amp;category_id=none">Un-categorized products</a>
 
 <script type="text/javascript">
 <?php

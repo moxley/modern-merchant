@@ -7,7 +7,7 @@
  */
 ?>
 <form class="listForm" name="form1" method="get" action="<?php ph($this->adminBaseUrl()) ?>">
-    <input type="hidden" name="a" value="product.search" />
+    <input type="hidden" name="a" value="product.list" />
 
     <div class="body">
         <!-- Search box -->

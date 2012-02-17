@@ -27,18 +27,21 @@ class product_Controller extends admin_Controller
         return $dao->getChildren();
     }
     
+    /**
+     * Load list parameters from request and session.
+     * Saves parameters to controller and session.
+     */
     function getListParams() {
         $sess = mm_getSession();
-        $this->q = '';
-        $this->category_id = $this->req('category_id');
-        $this->offset = $this->req('offset', 0);
-        $req = $this->request;
-        if (!isset($this->category_id)) {
-            $req = $sess->get('product.list.req');
-            if ($req) {
-                $this->category_id = gv($req, 'category_id');
-                $this->offset = gv($req, 'offset');
-            }
+        $props = array('category_id', 'offset', 'order', 'q');
+        $prev_req = $sess->get('product.list.req');
+        if (!$prev_req) $prev_req = array();
+        if ($this->req('reset')) $prev_req = array();
+        $req = array_merge($prev_req, $this->request);
+        array_delete_at($req, 'reset');
+        $req['offset'] = gv($req, 'offset', 0);
+        foreach ($props as $prop) {
+            $this->{$prop} = gv($req, $prop);
         }
         $sess->set('product.list.req', $req);
     }
@@ -52,29 +55,19 @@ class product_Controller extends admin_Controller
         $product_dao = new product_ProductDAO;
 
         $options = array();
-        $order = $this->req('order');
-        if ($order) {
-            $parts = preg_split('/\s+/', $order);
-            $order = $parts[0];
-            if ($order && in_array($order, array('sku', 'sortorder', 'name', 'price', 'count'))) {
-                if (count($parts) > 1 && strtolower($parts[1]) == 'desc') {
-                    $order .= ' desc';
-                }
-                $options['order'] = $order;
-            }
-        }
+        $options['order'] = $this->order;
+        $options['category_id'] = $this->category_id;
 
-        if ($this->category_id) {
-            $category_dao = new category_CategoryDAO;
+        $category_dao = new category_CategoryDAO;
+        list($this->products, $this->count) = $this->dao->findBySearch($this->q, $this->offset, $this->max_per_page, $options);
+        if ($this->category_id == 'none') {
+            $this->category = new category_Category(array('name' => "Not Categorized"));
+        }
+        else if ($this->category_id) {
             $this->category = $category_dao->fetch($this->category_id);
-            list($this->products, $this->count) = $product_dao->getListForCategoryId(
-                $this->category_id,
-                $this->offset, $this->max_per_page,
-                $options);
         }
         else {
-            $this->category = new category_Category(array('name' => "Not Categorized"));
-            list($this->products, $this->count) = $product_dao->getListForNoCategory($this->offset, $this->max_per_page, $options);
+            $this->category = new category_Category(array('name' => "Any Category"));
         }
         $product_dao->attachMediaToProducts($this->products);
         $extra_params = array('a'=>'product.list');
@@ -93,55 +86,9 @@ class product_Controller extends admin_Controller
       return '<a href="' . $this->adminBaseUrl() . '?' . makeQueryString($values) . '">' . h($label) . '</a>';
     }
     
-    function getSearchParams() {
-        $sess = mm_getSession();
-        $this->q = $this->req('q');
-        $this->offset = $this->req('offset', 0);
-        $req = $this->request;
-        if (!$this->q) {
-            $req = $sess->get('product.list.req');
-            if ($req) {
-                $this->q = gv($req, 'q');
-                $this->offset = gv($req, 'offset');
-            }
-        }
-        $sess->set('product.list.req', $req);
-    }
-    
-    function runSearchAction()
-    {
-        $this->getSearchParams();
-        $this->max_per_page = 50;
-        $this->max_links = 10;
-        list($this->products, $this->count) = $this->dao->findBySearch($this->q, $this->offset, $this->max_per_page);
-
-        $extra_params = array('a'=>'product.search');
-        $extra_params['q'] = $this->q;
-        $this->results_nav = $this->getResultsNav(
-            $this->count,
-            $this->offset,
-            $this->max_per_page,
-            $this->max_links,
-            $extra_params);
-
-        $this->setTemplate('product/list');
-    }
-    
-    function getListOrSearch()
-    {
-        $sess = mm_getSession();
-        $req = $sess->get('product.list.req');
-        if (@$req['q']) {
-            return 'product.search';
-        }
-        else {
-            return 'product.list';
-        }
-    }
-    
     function runDefaultAction()
     {
-        $this->setForward($this->getListOrSearch());
+        $this->setForward('product.list');
     }
     
     function runEditAction()
@@ -202,7 +149,7 @@ class product_Controller extends admin_Controller
             $this->setTemplate('product/edit');
         } else {
             $this->addNotice("Product successfully updated.");
-            $this->redirectToAction($this->getListOrSearch());
+            $this->redirectToAction('product.list');
             return false;
         }
     }
