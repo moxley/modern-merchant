@@ -15,7 +15,7 @@ class catalog_Plugin  extends plugin_Base
     {
         return array(
             'title'   => 'Product Catalog',
-            'version' => '0.1',
+            'version' => '0.2',
             'author'  => 'Moxley Stratton',
             'url'     => 'http://www.modernmerchant.org/',
             'depends' => array('category', 'product'));
@@ -84,9 +84,11 @@ class catalog_Plugin  extends plugin_Base
         mm_setSetting('templates.catalog.product.detail', 'catalog/productDetail');
         mm_setSetting('plugins.catalog.products_per_page', 20);
 
+        $this->upgrade_to_0_2();
+
         return $this->saveSampleImages();
     }
-    
+
     function upgrade_to_0_1()
     {
         $acd = mm_getSetting('actions.catalog.default');
@@ -100,6 +102,11 @@ class catalog_Plugin  extends plugin_Base
         mm_setSetting('plugins.catalog.products_per_page', 20);
 
         return true;
+    }
+    
+    function upgrade_to_0_2()
+    {
+        mm_setSetting('plugins.catalog.sort_order', '{product}.sortorder, {product}.available_on DESC');
     }
     
     function saveSampleImages() {

@@ -57,9 +57,15 @@ class catalog_Controller extends mvc_PublicController
             throw new Exception("No category found for id=$category_id");
         }
 
-        list($this->products, $this->count) = $this->dao->getDescendantProducts($this->category->id,
-            $this->offset, $this->max_results,
-            array('where' => '(available_on IS NULL OR available_on <= NOW()) AND active > 0'));
+        $opts = array(
+            'where' => '(available_on IS NULL OR available_on <= NOW()) AND active > 0',
+            'order' => $this->req('order')
+        );
+        list($this->products, $this->count) = $this->dao->getDescendantProducts(
+            $this->category->id,
+            $this->offset,
+            $this->max_results,
+            $opts);
         
         $extra_params = array('a' => 'catalog.products', 'category_id' => $this->category->id);
         $this->results_nav = $this->getResultsNav(

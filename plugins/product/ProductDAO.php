@@ -470,10 +470,18 @@ class product_ProductDAO extends mvc_DataAccess
 
         $count = $dbh->getOne("select count(*) $from");
         
+        $default_order = "{product}.sortorder, {product}.available_on DESC";
+        $order = mm_getSetting('plugins.catalog.sort_order', $default_order);
+        $o = array_delete_at($options, 'order');
+        $order = $o ? $o : $order;
+        $order = str_replace('{product}', 'p', $order);
+        if ($order) {
+            $order = "ORDER BY $order";
+        }
+
         // Run the product query
         $query = "select " . $this->getSelectColumns() . " $from " .
-                "ORDER BY p.sortorder, p.available_on DESC " .
-                "LIMIT $offset, $limit";
+                "$order LIMIT $offset, $limit";
 
         $products = $this->getListForQuery($query);
         

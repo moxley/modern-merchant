@@ -100,7 +100,7 @@ class content_Plugin extends plugin_Base
                 $content->name = $tpl_info['name'];
                 $content->description = $tpl_info['description'];
                 $content->type = $tpl_info['type'];
-                $content->title = $tpl_info['title'];
+                $content->title = gv($tpl_info, 'title');
                 $file = $tpl_info['name'] . '.' . $tpl_info['type'];
                 $content->body = file_get_contents(dirname(__FILE__) . '/templates/' . $file);
                 $da->add($content);
