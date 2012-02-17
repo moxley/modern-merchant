@@ -17,7 +17,7 @@
         under &quot;Selling Preferences&quot;.</li>
     <li>Follow the directions for activating Instant Payment Notification for your account.</li>
     <li>Set the &quot;Notification URL&quot; to
-        <code><?php $this->writeUrl(array('url' => mm_getConfigValue('urls.mm_root') . 'mm/plugins/paypal/ipn.php', 'schema' => 'https', 'absolute' => true)) ?></code>
+        <code><?php $this->writeUrl(array('url' => mm_getConfigValue('urls.mm_root') . 'plugins/paypal/ipn.php', 'schema' => 'https', 'absolute' => true)) ?></code>
         and save the setting.</li>
     <li>Go back to the &quot;Profile Summary&quot;</li>
     <li>Under &quot;Selling Preferences&quot;, click &quot;Website Payment Preferences&quot;</li>
