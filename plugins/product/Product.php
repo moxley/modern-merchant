@@ -74,7 +74,7 @@ class product_Product extends mvc_Model
     /**
      * @var array
      */
-    private $_pricings = null;
+    public $_pricings = null;
     
     public $_categories = null;
     

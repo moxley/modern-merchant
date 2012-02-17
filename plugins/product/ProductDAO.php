@@ -262,7 +262,6 @@ class product_ProductDAO extends mvc_DataAccess
                 " limit " . intval($offset) . "," . intval($limit);
         
         $products = $this->getListForQuery($query);
-
         return array($products, $count);
     }
     
@@ -278,6 +277,8 @@ class product_ProductDAO extends mvc_DataAccess
         while ($row = $rs->fetchAssoc()) {
             $products[] = $this->parseRow($row);
         }
+        $this->attachMediaToProducts($products);
+        $this->attachPricingToProducts($products);
         return $products;
     }
 
@@ -353,7 +354,8 @@ class product_ProductDAO extends mvc_DataAccess
         $sql = str_replace('{product_category}', 'pc', $sql);
         $rs = $db->query($sql, $params);
 
-        return array($this->getListForResultSet($rs), $count);
+        $list = $this->getListForResultSet($rs);
+        return array($list, $count);
     }
     
     function attachMediaToProducts($products)
@@ -375,6 +377,7 @@ class product_ProductDAO extends mvc_DataAccess
                 $product->_images[] = $media;
             }
         }
+        return $products;
     }
     
     function attachPricingToProducts($products)
@@ -384,11 +387,12 @@ class product_ProductDAO extends mvc_DataAccess
         $product_ids = array_map(create_function('$p', 'return $p->id;'), $products);
         $lookup = $pdao->makeProductIdToPricingLookup($product_ids);
         foreach ($products as $product) {
-            $product->pricings = array();
+            $product->_pricings = array();
             if (isset($lookup[$product->id])) {
-                $product->pricings = $lookup[$product->id];
+                $product->_pricings = $lookup[$product->id];
             }
         }
+        return $products;
     }
     
     //function fetch($id, $options=array())
