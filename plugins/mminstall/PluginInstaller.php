@@ -122,10 +122,10 @@ class mminstall_PluginInstaller extends mminstall_Checker {
                     $upgrade = true;
                 }
                 if ($upgrade) {
-                    $result = $this->upgradePlugin($plugin, false);
+                    $result = $this->upgradePlugin($plugin, true);
                 }
                 else {
-                    $result = $this->installPlugin($plugin, false);
+                    $result = $this->installPlugin($plugin, true);
                 }
                 if ($result) {
                     $this->markPlugin($plugin);
@@ -157,7 +157,7 @@ class mminstall_PluginInstaller extends mminstall_Checker {
                 } else {
                     $result->warn($this->manager->errors);
                     $this->addResult($result);
-                    return true;                    
+                    return true;
                 }
             }
             else {

@@ -8,6 +8,8 @@
 define('MM_INSTALLER', true);
 define('MM_LIB', dirname(dirname(dirname(__FILE__))));
 define('DS', DIRECTORY_SEPARATOR);
+ini_set('display_errors', true);
+ini_set('error_reporting', E_ALL);
 
 $GLOBALS['CONFIG_KEYS_TO_SUBSTITUTE'] = array(
     'version',
