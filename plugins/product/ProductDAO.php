@@ -312,7 +312,7 @@ class product_ProductDAO extends mvc_DataAccess
         }
         $joins = '';
         $category_id = array_delete_at($options, 'category_id');
-        if ($category_id) {
+        if ($category_id && $category_id !== 'all') {
             if ($category_id == 'none') {
                 $joins = '
                     LEFT JOIN mm_product_category pc on pc.product_id = product.id

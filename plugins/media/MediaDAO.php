@@ -49,7 +49,7 @@ class media_MediaDAO extends mvc_DataAccess
     {
         // Validation
         if (!$media->valid) {
-            $this->addErrors($media->errors);
+            $media->addErrors($media->errors);
             return false;
         }
         
@@ -102,13 +102,13 @@ class media_MediaDAO extends mvc_DataAccess
                 if (!file_exists($dest_dir)) {
                     mm_log("Creating directory $dest_dir");
                     if (!mkdirp($dest_dir)) {
-                        $this->addError("Failed to create directory");
+                        $media->addError("Failed to create directory");
                         return false;
                     }
                 }
                 
                 if (!copy($media->file_upload, $media->full_path)) {
-                    $this->addErrors("Failed to copy media file from $media->file_upload to $media->full_path");
+                    $media->addErrors("Failed to copy media file from $media->file_upload to $media->full_path");
                     return false;
                 }
                 unlink($media->file_upload);
@@ -132,7 +132,7 @@ class media_MediaDAO extends mvc_DataAccess
     function update($media)
     {
         if (!$media->valid) {
-            $this->addErrors($media->errors);
+            $media->addErrors($media->errors);
             return false;
         }
         
@@ -140,11 +140,14 @@ class media_MediaDAO extends mvc_DataAccess
         if (!$path) {
             throw new mm_IllegalArgumentException("No path defined for filepaths.media");
         }
+        $already_moved = false;
         $new_filename = $media->generateFilename();
         if ($media->filename != $new_filename) {
             $media->file_upload = $media->full_path;
             $media->filename = $new_filename;
-            $this->moveOrDelete($media);
+            $res = $this->moveOrDelete($media);
+            if (!$res) return false;
+            $already_moved = true;
         }
         
         $dbh = mm_getDatabase();
@@ -159,9 +162,9 @@ class media_MediaDAO extends mvc_DataAccess
             . " WHERE id=" . intval($media->id);
         $dbh->query($sql);
         
-        $res = $this->moveOrDelete($media);
-        if (!$res) {
-            return false;
+        if (!$already_moved) {
+            $res = $this->moveOrDelete($media);
+            if (!$res) return false;
         }
             
         //$this->addToCache($media);

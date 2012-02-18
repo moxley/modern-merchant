@@ -63,11 +63,11 @@ class product_Controller extends admin_Controller
         if ($this->category_id == 'none') {
             $this->category = new category_Category(array('name' => "Not Categorized"));
         }
+        else if (!$this->category_id || $this->category_id === 'all') {
+            $this->category = new category_Category(array('name' => "All Categories"));
+        }
         else if ($this->category_id) {
             $this->category = $category_dao->fetch($this->category_id);
-        }
-        else {
-            $this->category = new category_Category(array('name' => "Any Category"));
         }
         $product_dao->attachMediaToProducts($this->products);
         $extra_params = array('a'=>'product.list');

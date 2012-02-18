@@ -129,8 +129,15 @@ else {
 }
 
 ?>
-<a href="?a=product.list&amp;category_id=none">Un-categorized products</a>
-
+Special searches
+<ul>
+    <li>
+        <a href="?a=product.list&amp;category_id=none">Un-categorized products</a>
+    </li>
+    <li>
+        <a href="?a=product.list&amp;category_id=all">All products</a>
+    </li>
+</ul>
 <script type="text/javascript">
 <?php
     if( isset($this->category_id) )
