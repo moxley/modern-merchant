@@ -134,16 +134,27 @@ class addr_Address extends mvc_Model {
         if (!$this->skip_required && !$this->city) {
             $this->addError("Please specify a City or Township");
         }
-        if (!$this->skip_required && !$this->state) {
-            $this->addError("Please specify a State");
-        }
         if (!$this->skip_required && !$this->country) {
             $this->addError("Please specify a Country");
         }
+        if ($this->country === 'US' || $this->country === 'CA') {
+            if (!$this->skip_required && !$this->state) {
+                $this->addError("Please specify a State");
+            }
+        }
+
+        $this->validateZip();
+
         return $this->errors;
     }
     
     function validateZip() {
+        if ($this->skip_required) {
+            return $this->errors;
+        }
+        if (!($this->country === 'US' || $this->country === 'CA')) {
+            return $this->errors;
+        }
         if (!$this->zip) {
             $this->addError("Please provide a Zip or Postal code");
         }
