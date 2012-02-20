@@ -60,6 +60,10 @@ class cart_Cart extends mvc_Model
         $this->creation_date = mm_time();
         $this->unique_code = uniqid("cart_");
         $this->payment_method_id = payment_PaymentMethod::defaultMethodId();
+    }
+    
+    function afterAdd()
+    {
         mvc_Hooks::notifyListeners('cart.created', $this);
     }
     
