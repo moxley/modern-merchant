@@ -122,6 +122,9 @@
         </td>
         <td class="layout itemRowValues">
             <?php echo $this->textField('product[sortorder]', array('size' => 3))?>
+            <?php if (!$this->product->id): ?>
+            Leave blank to make this product first.
+            <?php endif ?>
         </td>
     </tr>
     <tr class="row">

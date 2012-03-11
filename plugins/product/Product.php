@@ -40,7 +40,7 @@ class product_Product extends mvc_Model
     /**
      * @var int
      */
-    public $sortorder = 0;
+    public $sortorder = null;
     
     public $name;
     
@@ -190,6 +190,14 @@ class product_Product extends mvc_Model
         if (!$this->is_valid) {
             return false;
         }
+
+        // Get highest sort order
+        if ($this->sortorder === '' || $this->sortorder === null) {
+            $sql = "select max(sortorder) from mm_product";
+            $highest = $db->getOne($sql);
+            $this->sortorder = $highest + 1;
+        }
+
         $dao = new product_ProductDAO;
         $this->modify_date = time();
         $dao->save($this);

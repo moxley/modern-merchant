@@ -54,11 +54,6 @@ class product_ProductDAO extends mvc_DataAccess
         $db = mm_getDatabase();
         $fmt = $db->getFormatter();
         
-        // Get highest sort order
-        $sql = "select max(sortorder) from mm_product";
-        $highest = $db->getOne($sql);
-        $product->sortorder = $highest + 1;
-        
         $product->modify_date = mm_time();
         if (!$product->sku) {
             $product->sku = uniqid('');
