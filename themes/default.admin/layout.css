@@ -12,7 +12,9 @@ div.content {
 }
 
 #content {
+  overflow: auto;
   padding: 5px;
+  width: 1220px;
 }
 #content .nav {
   margin-bottom: 1em;
