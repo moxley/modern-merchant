@@ -157,7 +157,7 @@ class product_Controller extends admin_Controller
     function runNewAction()
     {
         $this->product = new product_Product($this->req('product'));
-        if ($category_id = $this->req('category_id')) {
+        if ($category_id = $this->req('category_id') && intval($category_id) != 0) {
             $cdao = new category_CategoryDAO;
             $this->product->addCategory($cdao->fetch($category_id));
         }
